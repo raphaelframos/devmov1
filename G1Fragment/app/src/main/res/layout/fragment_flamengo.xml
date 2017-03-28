@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.powellapps.g1fragment.fragments.FlamengoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="Maior do mundo!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textStyle="italic"
+        android:text="Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!Maior rival do Vasco, Maior rival do Botafogo,
+        Maior rival do Fluminense. Ou seja... o maior de todos!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
