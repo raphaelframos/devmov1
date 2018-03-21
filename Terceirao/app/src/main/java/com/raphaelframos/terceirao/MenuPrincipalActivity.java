@@ -42,9 +42,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent intencao = new Intent(MenuPrincipalActivity.this, CadastroDeNotaActivity.class);
-        startActivity(intencao);
+       // startActivity(intencao);
 
-     //   startActivity(new Intent(this, NovaDisciplinaActivity.class));
+        startActivity(new Intent(this, NotasActivity.class));
 
     }
 

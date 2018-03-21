@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NovaDisciplinaActivity" />
-        <activity android:name=".CadastroDeNotaActivity"></activity>
+        <activity android:name=".CadastroDeNotaActivity" />
+        <activity android:name=".NotasActivity"></activity>
     </application>
 
 </manifest>
