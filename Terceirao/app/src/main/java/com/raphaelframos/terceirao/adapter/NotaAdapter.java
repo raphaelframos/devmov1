@@ -45,6 +45,11 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         return disciplinas.size();
     }
 
+    public void atualiza(ArrayList<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+        notifyDataSetChanged();
+    }
+
     public class NotaViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textViewNome;
