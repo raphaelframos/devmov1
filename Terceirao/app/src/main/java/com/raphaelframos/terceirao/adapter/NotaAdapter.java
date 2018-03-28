@@ -36,7 +36,7 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         Disciplina disciplina = disciplinas.get(position);
 
         holder.textViewNome.setText(disciplina.getNome());
-        holder.textViewMedia.setText(disciplina.getMedia() + " " + "de média");
+        holder.textViewMedia.setText(disciplina.getMedia()+ "");
 
     }
 

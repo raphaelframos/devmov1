@@ -44,4 +44,17 @@ public class BancoDeDados {
 
         return disciplinas;
     }
+
+    public ArrayList<Disciplina> criaDisciplinasDemo() {
+        Disciplina disciplina = new Disciplina("Portugues", 10);
+        Disciplina disciplina1 = new Disciplina("Matemática", 8);
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+        disciplinas.add(disciplina);
+        disciplinas.add(disciplina1);
+        disciplinas.add(disciplina);
+        disciplinas.add(disciplina1);
+        disciplinas.add(disciplina);
+        disciplinas.add(disciplina1);
+        return disciplinas;
+    }
 }

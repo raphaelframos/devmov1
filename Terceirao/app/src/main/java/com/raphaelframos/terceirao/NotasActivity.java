@@ -29,7 +29,8 @@ public class NotasActivity extends AppCompatActivity {
         recyclerViewNotas = findViewById(R.id.recycler_notas);
         recyclerViewNotas.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        notaAdapter = new NotaAdapter(new ArrayList<Disciplina>());
+        BancoDeDados.getInstance().criaDisciplinasDemo();
+        notaAdapter = new NotaAdapter(BancoDeDados.getInstance().criaDisciplinasDemo());
         recyclerViewNotas.setAdapter(notaAdapter);
     }
 
@@ -55,6 +56,6 @@ public class NotasActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        notaAdapter.atualiza(BancoDeDados.getInstance().getDisciplinas());
+     //   notaAdapter.atualiza(BancoDeDados.getInstance().getDisciplinas());
     }
 }
