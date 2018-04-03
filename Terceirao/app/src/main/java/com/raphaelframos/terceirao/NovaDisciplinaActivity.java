@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
+import com.raphaelframos.terceirao.model.Disciplina;
 
 public class NovaDisciplinaActivity extends AppCompatActivity {
 
@@ -21,9 +22,15 @@ public class NovaDisciplinaActivity extends AppCompatActivity {
 
         String nomeDoAluno = getIntent().getStringExtra("nome");
         int idade = getIntent().getIntExtra("idade", 0);
+        Disciplina disciplina = (Disciplina) getIntent().getSerializableExtra("disciplina");
+
 
         editNome = findViewById(R.id.edit_text_nome_disciplina);
         buttonSalvar = findViewById(R.id.button_salvar);
+
+        if(disciplina != null){
+            editNome.setText(disciplina.getNome());
+        }
 
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,7 +30,7 @@ public class NotasActivity extends AppCompatActivity {
         recyclerViewNotas.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         BancoDeDados.getInstance().criaDisciplinasDemo();
-        notaAdapter = new NotaAdapter(BancoDeDados.getInstance().criaDisciplinasDemo());
+        notaAdapter = new NotaAdapter(this, BancoDeDados.getInstance().criaDisciplinasDemo());
         recyclerViewNotas.setAdapter(notaAdapter);
     }
 

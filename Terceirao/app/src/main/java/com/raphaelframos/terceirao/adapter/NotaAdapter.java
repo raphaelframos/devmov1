@@ -1,11 +1,15 @@
 package com.raphaelframos.terceirao.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.raphaelframos.terceirao.NovaDisciplinaActivity;
 import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.model.Disciplina;
 
@@ -18,9 +22,11 @@ import java.util.ArrayList;
 public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder>{
 
     private ArrayList<Disciplina> disciplinas;
+    private Activity context;
 
-    public NotaAdapter(ArrayList<Disciplina> disciplinasDaActivity) {
+    public NotaAdapter(Activity context, ArrayList<Disciplina> disciplinasDaActivity) {
         this.disciplinas = disciplinasDaActivity;
+        this.context = context;
     }
 
     @Override
@@ -33,10 +39,28 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
     @Override
     public void onBindViewHolder(NotaViewHolder holder, int position) {
 
-        Disciplina disciplina = disciplinas.get(position);
+        final Disciplina disciplina = disciplinas.get(position);
 
         holder.textViewNome.setText(disciplina.getNome());
         holder.textViewMedia.setText(disciplina.getMedia()+ "");
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"Cliquei com click curto", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent it = new Intent(context, NovaDisciplinaActivity.class);
+                it.putExtra("disciplina", disciplina);
+                context.startActivity(it);
+                return false;
+            }
+        });
 
     }
 

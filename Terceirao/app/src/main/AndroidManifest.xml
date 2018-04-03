@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".NovaDisciplinaActivity" />
         <activity android:name=".CadastroDeNotaActivity" />
-        <activity android:name=".NotasActivity"></activity>
+        <activity android:name=".NotasActivity" />
+        <activity android:name=".DetalheNotaActivity"></activity>
     </application>
 
 </manifest>
