@@ -8,7 +8,7 @@
     tools:context=".DetalheNotaActivity">
 
     <TextView
-        android:text="Nome da disciplina"
+        android:id="@+id/text_view_detalhe_nome_disciplina"
         android:textSize="30sp"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
@@ -16,74 +16,115 @@
 
     <TextView
         android:gravity="center_horizontal"
-        android:text="Nome do professor"
+        android:id="@+id/text_view_detalhe_nome_professor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TableLayout
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView android:layout_width="wrap_content"
+                    android:text="Nota 1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/text_view_nota1"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:layout_width="wrap_content"
+                    android:text="Nota 2"
+                    android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/text_view_nota2"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:layout_width="wrap_content"
+                    android:text="Nota 3"
+                    android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/text_view_nota3"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:layout_width="wrap_content"
+                    android:text="Nota 4"
+                    android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/text_view_nota4"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+        </TableLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        app:cardUseCompatPadding="true"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TableRow>
+        <TableLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView android:layout_width="wrap_content"
-                android:text="Nota 1"
-                android:layout_height="wrap_content"/>
+            <TableRow>
 
-            <TextView android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/text_view_nota1"
-                android:layout_height="wrap_content"/>
-        </TableRow>
+                <TextView android:layout_width="wrap_content"
+                    android:text="Média"
+                    android:layout_height="wrap_content"/>
 
-        <TableRow>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp"
+                    android:id="@+id/text_view_media"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+        </TableLayout>
 
-            <TextView android:layout_width="wrap_content"
-                android:text="Nota 2"
-                android:layout_height="wrap_content"/>
+    </android.support.v7.widget.CardView>
 
-            <TextView android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/text_view_nota2"
-                android:layout_height="wrap_content"/>
-        </TableRow>
+    <android.support.v7.widget.CardView
+        app:cardUseCompatPadding="true"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TableRow>
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:textSize="30sp"
+            android:id="@+id/text_view_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.CardView>
 
-            <TextView android:layout_width="wrap_content"
-                android:text="Nota 3"
-                android:layout_height="wrap_content"/>
 
-            <TextView android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/text_view_nota3"
-                android:layout_height="wrap_content"/>
-        </TableRow>
-
-        <TableRow>
-
-            <TextView android:layout_width="wrap_content"
-                android:text="Nota 4"
-                android:layout_height="wrap_content"/>
-
-            <TextView android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/text_view_nota4"
-                android:layout_height="wrap_content"/>
-        </TableRow>
-
-        <TableRow>
-
-            <TextView android:layout_width="wrap_content"
-                android:text="Média"
-                android:layout_height="wrap_content"/>
-
-            <TextView android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/text_view_media"
-                android:layout_height="wrap_content"/>
-        </TableRow>
-    </TableLayout>
 
 </LinearLayout>

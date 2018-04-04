@@ -61,12 +61,41 @@ public class Disciplina implements Serializable{
         notas.add(nota);
     }
 
-    public void calculaMedia() {
+    public Double calculaMedia() {
 
+        if(notas == null || notas.size() == 0){
+            return 0.0;
+        }
+        
         double media = 0;
         for(double nota : notas){
             media = media + nota;
         }
         media = media/notas.size();
+        return media;
+    }
+
+    public Double getNota(int posicao){
+        try{
+            return notas.get(posicao-1);
+        }catch (Exception e){
+            return 0.0;
+        }
+    }
+
+    public Double getNotaUm() {
+        return getNota(1);
+    }
+
+    public Double getNotaDois() {
+        return getNota(2);
+    }
+
+    public Double getNotaTres() {
+        return getNota(3);
+    }
+
+    public Double getNotaQuatro() {
+        return getNota(4);
     }
 }

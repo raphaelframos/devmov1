@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.raphaelframos.terceirao.DetalheNotaActivity;
 import com.raphaelframos.terceirao.NovaDisciplinaActivity;
 import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.model.Disciplina;
@@ -48,7 +49,9 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"Cliquei com click curto", Toast.LENGTH_LONG).show();
+                Intent it = new Intent(context, DetalheNotaActivity.class);
+                it.putExtra("disciplina", disciplina);
+                context.startActivity(it);
             }
         });
 
