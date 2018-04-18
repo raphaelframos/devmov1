@@ -26,12 +26,7 @@ public class NotasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas);
 
-        recyclerViewNotas = findViewById(R.id.recycler_notas);
-        recyclerViewNotas.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        BancoDeDados.getInstance().criaDisciplinasDemo();
-        notaAdapter = new NotaAdapter(this, BancoDeDados.getInstance().criaDisciplinasDemo());
-        recyclerViewNotas.setAdapter(notaAdapter);
     }
 
     @Override
@@ -40,18 +35,6 @@ public class NotasActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-
-            case R.id.item_adicionar:
-                startActivity(new Intent(getApplicationContext(), NovaDisciplinaActivity.class));
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onResume() {

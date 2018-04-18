@@ -3,4 +3,22 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="disciplinas">Disciplinas</string>
+    <string name="perfil">Perfil</string>
+    <string name="nome">Nome</string>
+    <string name="idade">Idade</string>
+    <string name="selecione_sua_escola">Selecione sua escola:</string>
+    <string name="ano">Ano</string>
+
+
+    <string-array name="escola">
+        <item>10 de maio</item>
+        <item>Central</item>
+        <item>FSJ</item>
+        <item>Redentor</item>
+        <item>Único</item>
+    </string-array>
 </resources>

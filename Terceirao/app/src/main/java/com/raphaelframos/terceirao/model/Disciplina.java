@@ -66,7 +66,7 @@ public class Disciplina implements Serializable{
         if(notas == null || notas.size() == 0){
             return 0.0;
         }
-        
+
         double media = 0;
         for(double nota : notas){
             media = media + nota;
