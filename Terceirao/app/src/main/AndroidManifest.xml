@@ -21,7 +21,8 @@
         <activity android:name=".NovaDisciplinaActivity" />
         <activity android:name=".CadastroDeNotaActivity" />
         <activity android:name=".NotasActivity" />
-        <activity android:name=".DetalheNotaActivity"></activity>
+        <activity android:name=".DetalheNotaActivity" />
+        <activity android:name="com.raphaelframos.FirebaseActivity"></activity>
     </application>
 
 </manifest>

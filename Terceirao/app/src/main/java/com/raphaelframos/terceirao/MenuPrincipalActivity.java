@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.raphaelframos.FirebaseActivity;
 import com.raphaelframos.terceirao.fragment.DisciplinasFragment;
 import com.raphaelframos.terceirao.fragment.PerfilFragment;
 import com.raphaelframos.terceirao.utils.FragmentoUtils;
@@ -42,6 +43,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         FragmentoUtils.replace(MenuPrincipalActivity.this, new DisciplinasFragment());
+        startActivity(new Intent(this, FirebaseActivity.class));
 
 
     }

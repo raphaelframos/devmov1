@@ -61,6 +61,6 @@ public class BancoDeDados {
         disciplinas.add(disciplina1);
         disciplinas.add(disciplina);
         disciplinas.add(disciplina1);
-        return disciplinas;
+        return new ArrayList<>();
     }
 }

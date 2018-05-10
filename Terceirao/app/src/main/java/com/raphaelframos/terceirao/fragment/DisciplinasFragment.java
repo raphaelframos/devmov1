@@ -38,7 +38,6 @@ public class DisciplinasFragment extends Fragment {
         RecyclerView recyclerViewDisciplinas = view.findViewById(R.id.recycler_disciplinas);
         recyclerViewDisciplinas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        BancoDeDados.getInstance().criaDisciplinasDemo();
         NotaAdapter notaAdapter = new NotaAdapter(getActivity(), BancoDeDados.getInstance().criaDisciplinasDemo());
         recyclerViewDisciplinas.setAdapter(notaAdapter);
         setHasOptionsMenu(true);

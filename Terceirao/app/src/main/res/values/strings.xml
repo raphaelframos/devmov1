@@ -12,6 +12,8 @@
     <string name="idade">Idade</string>
     <string name="selecione_sua_escola">Selecione sua escola:</string>
     <string name="ano">Ano</string>
+    <string name="shared_config">sharedConfig</string>
+    <string name="id">id</string>
 
 
     <string-array name="escola">

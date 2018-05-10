@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "238029761556",
+    "firebase_url": "https://terceirao-1bcb0.firebaseio.com",
+    "project_id": "terceirao-1bcb0",
+    "storage_bucket": "terceirao-1bcb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238029761556:android:cae3efc7a91ebdcc",
+        "android_client_info": {
+          "package_name": "com.raphaelframos.terceirao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238029761556-4di1jua7fmb5rfv17n8di507la7e4jm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1j-OwZ9XaJN2G6ynVS4oTyx7nnHpSEss"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
