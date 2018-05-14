@@ -98,4 +98,12 @@ public class Disciplina implements Serializable{
     public Double getNotaQuatro() {
         return getNota(4);
     }
+
+    public void adicionaNota(String nota) {
+        try {
+            adicionaNota(Double.parseDouble(nota));
+        }catch (Exception e){
+            adicionaNota(0.0);
+        }
+    }
 }

@@ -22,7 +22,7 @@
         <activity android:name=".CadastroDeNotaActivity" />
         <activity android:name=".NotasActivity" />
         <activity android:name=".DetalheNotaActivity" />
-        <activity android:name="com.raphaelframos.FirebaseActivity"></activity>
+        <activity android:name=".FirebaseActivity"></activity>
     </application>
 
 </manifest>

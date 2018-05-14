@@ -1,4 +1,4 @@
-package com.raphaelframos;
+package com.raphaelframos.terceirao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
