@@ -1,12 +1,15 @@
 package com.raphaelframos.terceirao;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.raphaelframos.terceirao.fragment.ChatFragment;
 import com.raphaelframos.terceirao.fragment.DisciplinasFragment;
 import com.raphaelframos.terceirao.fragment.PerfilFragment;
 import com.raphaelframos.terceirao.utils.FragmentoUtils;
@@ -23,6 +26,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
                     FragmentoUtils.replace(MenuPrincipalActivity.this, new DisciplinasFragment());
                     return true;
                 case R.id.navigation_dashboard:
+                    FragmentoUtils.replace(MenuPrincipalActivity.this, new ChatFragment());
                     return true;
                 case R.id.navigation_notifications:
                     FragmentoUtils.replace(MenuPrincipalActivity.this, new PerfilFragment());
@@ -40,7 +44,11 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        FragmentoUtils.replace(MenuPrincipalActivity.this, new DisciplinasFragment());
+
+
+
+        FragmentoUtils.replace(MenuPrincipalActivity.this, new PerfilFragment());
+
      //   startActivity(new Intent(this, FirebaseActivity.class));
 
 

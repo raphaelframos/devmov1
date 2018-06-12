@@ -1,12 +1,15 @@
 package com.raphaelframos.terceirao.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,10 +17,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.raphaelframos.terceirao.NovaDisciplinaActivity;
 import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.adapter.NotaAdapter;
 import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
+import com.raphaelframos.terceirao.model.Disciplina;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,10 +36,12 @@ import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
 public class DisciplinasFragment extends Fragment {
 
 
+    private NotaAdapter notaAdapter;
+    private ArrayList<Disciplina> disciplinas;
+
     public DisciplinasFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,10 +51,43 @@ public class DisciplinasFragment extends Fragment {
         RecyclerView recyclerViewDisciplinas = view.findViewById(R.id.recycler_disciplinas);
         recyclerViewDisciplinas.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        NotaAdapter notaAdapter = new NotaAdapter(getActivity(), BancoDeDados.getInstance().criaDisciplinasDemo());
+        notaAdapter = new NotaAdapter(getActivity(), new ArrayList<Disciplina>());
         recyclerViewDisciplinas.setAdapter(notaAdapter);
         setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference myRef = database.getReference("disciplinas");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_config), Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString(getString(R.string.id), "");
+        myRef.child(id);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                disciplinas = new ArrayList<>();
+                for(DataSnapshot data: dataSnapshot.getChildren()){
+                    for(DataSnapshot disciplina : data.getChildren()){
+                        try {
+                            disciplinas.add(disciplina.getValue(Disciplina.class));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                notaAdapter.atualiza(disciplinas);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

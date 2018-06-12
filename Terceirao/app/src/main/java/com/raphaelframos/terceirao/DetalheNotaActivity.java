@@ -1,6 +1,5 @@
 package com.raphaelframos.terceirao;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -41,10 +40,10 @@ public class DetalheNotaActivity extends AppCompatActivity {
 
         textViewNomeProfessor.setText(disciplina.getNomeDoProfessor());
         textViewNomeDisciplina.setText(disciplina.getNome());
-        Double nota1 = disciplina.getNotaUm();
-        Double nota2 = disciplina.getNotaDois();
-        Double nota3 = disciplina.getNotaTres();
-        Double nota4 = disciplina.getNotaQuatro();
+        Double nota1 = disciplina.retornaNotaUm();
+        Double nota2 = disciplina.retornaNotaDois();
+        Double nota3 = disciplina.retornaNotaTres();
+        Double nota4 = disciplina.retornaNotaQuatro();
         Double media = disciplina.calculaMedia();
         textViewNota1.setText(nota1.toString());
         textViewNota1.setTextColor(GeralUtils.getCorPeloValor(getApplicationContext(), nota1));

@@ -43,7 +43,8 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         final Disciplina disciplina = disciplinas.get(position);
 
         holder.textViewNome.setText(disciplina.getNome());
-        holder.textViewMedia.setText(disciplina.getMedia()+ "");
+        holder.textViewMedia.setText(disciplina.retornaMedia());
+        holder.textViewNomeProfessor.setText(disciplina.getNomeDoProfessor());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +82,14 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
 
         private TextView textViewNome;
         private TextView textViewMedia;
+        private TextView textViewNomeProfessor;
 
         public NotaViewHolder(View itemView) {
             super(itemView);
 
             textViewMedia = itemView.findViewById(R.id.text_view_media);
             textViewNome = itemView.findViewById(R.id.text_view_nome_da_disciplina);
+            textViewNomeProfessor = itemView.findViewById(R.id.text_view_nome_professor);
         }
     }
 }

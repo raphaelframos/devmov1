@@ -7,6 +7,13 @@
     android:padding="10dp"
     tools:context=".fragment.PerfilFragment">
 
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_action_foto"
+        android:id="@+id/imageFoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -53,6 +60,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/button_salvar_perfil"
         android:layout_margin="15dp"
         android:text="Salvar"
         android:layout_width="match_parent"

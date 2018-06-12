@@ -1,10 +1,14 @@
 package com.raphaelframos.terceirao.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -23,13 +29,23 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.raphaelframos.terceirao.R;
+import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,9 +54,13 @@ public class PerfilFragment extends Fragment {
 
 
     private static final int RC_SIGN_IN = 123;
+    private static final int CODIGO_IMAGEM = 423;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-
+    private ImageView imageViewFoto;
+    private FirebaseStorage storage;
+    private Uri imagem;
+    private Button buttonSalvar;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -58,6 +78,7 @@ public class PerfilFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -65,15 +86,54 @@ public class PerfilFragment extends Fragment {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
-        signIn();
+
+        imageViewFoto = getView().findViewById(R.id.imageFoto);
+        buttonSalvar = getView().findViewById(R.id.button_salvar_perfil);
+
+        imageViewFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);//
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), CODIGO_IMAGEM);
+            }
+        });
+
+        if(BancoDeDados.getInstance().temId(getActivity())){
+
+        }else {
+            signIn();
+        }
+
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        StorageReference imagemRef = storage.getReference().child("images/"+BancoDeDados.getInstance().getId(getActivity()));
+                        imagemRef.putFile(imagem).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                Toast.makeText(getContext(), "Imagem salva com sucesso!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
 
     }
 
-    private String buscaId(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_config), Context.MODE_PRIVATE);
-        String result = sharedPreferences.getString(getString(R.string.id), "");
-        return result;
-    }
 
     @Override
     public void onStart() {
@@ -85,6 +145,7 @@ public class PerfilFragment extends Fragment {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if(account != null){
             salvaId(account);
+            firebaseAuthWithGoogle(account);
             Log.v("terceirao", "" + account.getEmail() + " e " + account.getDisplayName() + " e " + account.getId());
         }else{
             Log.v("terceirao", "Conta nula");
@@ -105,8 +166,38 @@ public class PerfilFragment extends Fragment {
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
+            try{
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+        }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        if (requestCode == CODIGO_IMAGEM) {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                if (data != null)
+                {
+                    try
+                    {
+
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                      //  imageViewFoto.setImageBitmap(bitmap);
+
+                        imagem = data.getData();
+                        Picasso.get().load(imagem).fit().centerCrop().into(imageViewFoto);
+
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED)
+            {
+                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

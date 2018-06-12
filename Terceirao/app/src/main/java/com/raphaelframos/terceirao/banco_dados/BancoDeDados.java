@@ -1,5 +1,11 @@
 package com.raphaelframos.terceirao.banco_dados;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
+
+import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.model.Disciplina;
 
 import java.util.ArrayList;
@@ -62,5 +68,15 @@ public class BancoDeDados {
         disciplinas.add(disciplina);
         disciplinas.add(disciplina1);
         return new ArrayList<>();
+    }
+
+    public boolean temId(Activity activity) {
+        return !getId(activity).isEmpty();
+    }
+
+    public String getId(Activity activity) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(activity.getString(R.string.shared_config), Context.MODE_PRIVATE);
+        String result = sharedPreferences.getString(activity.getString(R.string.id), "");
+        return result;
     }
 }

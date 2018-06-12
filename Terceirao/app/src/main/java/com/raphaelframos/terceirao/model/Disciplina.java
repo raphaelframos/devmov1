@@ -1,5 +1,7 @@
 package com.raphaelframos.terceirao.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,14 +13,12 @@ public class Disciplina implements Serializable{
 
     private String nome;
     private String nomeDoProfessor;
-    private double media;
     private ArrayList<Double> notas = new ArrayList<>();
 
     public Disciplina(){}
 
     public Disciplina(String nome, double media) {
         setNome(nome);
-        setMedia(media);
     }
 
     public String getNome() {
@@ -29,13 +29,6 @@ public class Disciplina implements Serializable{
         this.nome = nome;
     }
 
-    public double getMedia() {
-        return media;
-    }
-
-    public void setMedia(double media) {
-        this.media = media;
-    }
 
     public ArrayList<Double> getNotas() {
         return notas;
@@ -83,27 +76,45 @@ public class Disciplina implements Serializable{
         }
     }
 
-    public Double getNotaUm() {
+    public Double retornaNotaUm() {
         return getNota(1);
     }
 
-    public Double getNotaDois() {
+    public Double retornaNotaDois() {
         return getNota(2);
     }
 
-    public Double getNotaTres() {
+    public Double retornaNotaTres() {
         return getNota(3);
     }
 
-    public Double getNotaQuatro() {
+    public Double retornaNotaQuatro() {
         return getNota(4);
     }
 
     public void adicionaNota(String nota) {
-        try {
-            adicionaNota(Double.parseDouble(nota));
+        if(!nota.isEmpty()) {
+            try {
+                adicionaNota(Double.parseDouble(nota));
+            } catch (Exception e) {
+                adicionaNota(0.0);
+            }
+        }
+    }
+
+    public String retornaMedia() {
+        try{
+            double media = 0;
+            if(notas.size() > 0){
+                for(Double nota : notas){
+                    Log.v("terceirao", "Nota " + nota);
+                    media += nota;
+                }
+                media = media/notas.size();
+            }
+            return media + "";
         }catch (Exception e){
-            adicionaNota(0.0);
+            return "0";
         }
     }
 }

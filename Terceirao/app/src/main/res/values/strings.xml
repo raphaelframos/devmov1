@@ -14,6 +14,7 @@
     <string name="ano">Ano</string>
     <string name="shared_config">sharedConfig</string>
     <string name="id">id</string>
+    <string name="chat">Chat</string>
 
 
     <string-array name="escola">

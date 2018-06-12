@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
 import com.raphaelframos.terceirao.model.Disciplina;
+import com.raphaelframos.terceirao.utils.GeralUtils;
 
 public class NovaDisciplinaActivity extends AppCompatActivity {
 
@@ -33,7 +35,9 @@ public class NovaDisciplinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_disciplina);
 
-        final Disciplina disciplina = (Disciplina) getIntent().getSerializableExtra("disciplina");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        disciplina = (Disciplina) getIntent().getSerializableExtra("disciplina");
 
 
         editNome = findViewById(R.id.edit_text_nome_disciplina);
@@ -53,7 +57,6 @@ public class NovaDisciplinaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(capturaDados()){
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
                     SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_config), Context.MODE_PRIVATE);
                     String id = sharedPreferences.getString(getString(R.string.id), "");
@@ -74,8 +77,6 @@ public class NovaDisciplinaActivity extends AppCompatActivity {
                             alerta.show();
                         }
                     });
-
-
 
                 }
             }
