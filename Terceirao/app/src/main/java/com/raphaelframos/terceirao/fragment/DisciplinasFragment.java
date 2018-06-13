@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
  */
 public class DisciplinasFragment extends Fragment {
 
+    private static String TAG = "terceirao";
 
     private NotaAdapter notaAdapter;
     private ArrayList<Disciplina> disciplinas;
@@ -63,22 +65,17 @@ public class DisciplinasFragment extends Fragment {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference myRef = database.getReference("disciplinas");
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.shared_config), Context.MODE_PRIVATE);
         String id = sharedPreferences.getString(getString(R.string.id), "");
-        myRef.child(id);
+        DatabaseReference myRef = database.getReference("disciplinas").child(id);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 disciplinas = new ArrayList<>();
-                for(DataSnapshot data: dataSnapshot.getChildren()){
-                    for(DataSnapshot disciplina : data.getChildren()){
-                        try {
-                            disciplinas.add(disciplina.getValue(Disciplina.class));
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }
+                for(DataSnapshot disciplina: dataSnapshot.getChildren()){
+                    disciplinas.add(disciplina.getValue(Disciplina.class));
+
                 }
                 notaAdapter.atualiza(disciplinas);
             }

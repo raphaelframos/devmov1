@@ -3,10 +3,8 @@ package com.raphaelframos.terceirao.banco_dados;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentActivity;
 
 import com.raphaelframos.terceirao.R;
-import com.raphaelframos.terceirao.model.Disciplina;
 
 import java.util.ArrayList;
 
@@ -35,40 +33,7 @@ public class BancoDeDados {
         nomeDasDisciplinas.add(nomeDaDisciplina);
     }
 
-    public ArrayList<String> getNomeDasDisciplinas(){
-        return nomeDasDisciplinas;
-    }
 
-    public ArrayList<Disciplina> getDisciplinas(){
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
-        if(nomeDasDisciplinas != null && nomeDasDisciplinas.size() > 0){
-            for(String nome : nomeDasDisciplinas){
-                Disciplina disciplina = new Disciplina(nome, 10);
-                disciplinas.add(disciplina);
-            }
-        }
-
-        return disciplinas;
-    }
-
-    public ArrayList<Disciplina> criaDisciplinasDemo() {
-        Disciplina disciplina = new Disciplina("Portugues", 10);
-        Disciplina disciplina1 = new Disciplina("Matemática", 8);
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        disciplinas.add(disciplina);
-        disciplinas.add(disciplina1);
-        return new ArrayList<>();
-    }
 
     public boolean temId(Activity activity) {
         return !getId(activity).isEmpty();
@@ -78,5 +43,29 @@ public class BancoDeDados {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(activity.getString(R.string.shared_config), Context.MODE_PRIVATE);
         String result = sharedPreferences.getString(activity.getString(R.string.id), "");
         return result;
+    }
+
+    public static SharedPreferences.Editor getEditor(Activity activity){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(activity.getString(R.string.shared_config), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        return editor;
+    }
+
+    public void salvaNome(Activity activity, String nome) {
+        getEditor(activity).putString(activity.getString(R.string.nome), nome).apply();
+    }
+
+    public void salvaFoto(Activity activity, String foto) {
+        getEditor(activity).putString(activity.getString(R.string.foto), foto).apply();
+    }
+
+    public String getNome(Activity activity) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(activity.getString(R.string.shared_config), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(activity.getString(R.string.nome), "");
+    }
+
+    public String getFoto(Activity activity) {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(activity.getString(R.string.shared_config), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(activity.getString(R.string.foto), "");
     }
 }

@@ -28,6 +28,7 @@ import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.adapter.ChatAdapter;
 import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
 import com.raphaelframos.terceirao.model.Mensagem;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -83,7 +84,13 @@ public class ChatFragment extends Fragment {
                     protected void populateView(View v, Mensagem model, int position) {
 
                         TextView textView = v.findViewById(R.id.text_view_mensagem);
+                        TextView textViewNome = v.findViewById(R.id.text_view_nome);
+                        ImageView imageViewFoto = v.findViewById(R.id.image_foto);
                         textView.setText(model.getTexto());
+                        textViewNome.setText(model.getNome());
+                        if(!model.getFoto().isEmpty()) {
+                            Picasso.get().load(model.getFoto()).into(imageViewFoto);
+                        }
 
                     }
                 };
@@ -104,9 +111,11 @@ public class ChatFragment extends Fragment {
 
                 String texto = editTextMensagem.getText().toString();
 
-                if(!texto.isEmpty()){
+                if(!texto.isEmpty() && !BancoDeDados.getInstance().getId(getActivity()).isEmpty()){
                     Mensagem mensagem = new Mensagem();
                     mensagem.setId(BancoDeDados.getInstance().getId(getActivity()));
+                    mensagem.setFoto(BancoDeDados.getInstance().getFoto(getActivity()));
+                    mensagem.setNome(BancoDeDados.getInstance().getNome(getActivity()));
                     mensagem.setTexto(texto);
                     reference.push().setValue(mensagem);
                     editTextMensagem.setText("");
@@ -115,11 +124,6 @@ public class ChatFragment extends Fragment {
 
             }
         });
-
-        /*
-
-        */
-
 
     }
 }

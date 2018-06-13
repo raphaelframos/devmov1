@@ -4,6 +4,8 @@ public class Mensagem {
 
     private String texto;
     private String id;
+    private String foto;
+    private String nome;
 
     public String getTexto() {
         return texto;
@@ -19,5 +21,21 @@ public class Mensagem {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
