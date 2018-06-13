@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -37,11 +39,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
+import com.raphaelframos.terceirao.model.Usuario;
+import com.raphaelframos.terceirao.utils.GeralUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -61,11 +67,14 @@ public class PerfilFragment extends Fragment {
     private FirebaseStorage storage;
     private Uri imagem;
     private Button buttonSalvar;
+    private EditText editTextNome;
+    private EditText editTextIdade;
+    private EditText editTextAno;
+    private Spinner spinnerEscola;
 
     public PerfilFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,7 +97,11 @@ public class PerfilFragment extends Fragment {
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         imageViewFoto = getView().findViewById(R.id.imageFoto);
+        spinnerEscola = getView().findViewById(R.id.spinner_escola_usuario);
         buttonSalvar = getView().findViewById(R.id.button_salvar_perfil);
+        editTextAno = getView().findViewById(R.id.edit_text_ano);
+        editTextIdade = getView().findViewById(R.id.edit_text_idade);
+        editTextNome = getView().findViewById(R.id.edit_text_nome_aluno);
 
         imageViewFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,34 +113,47 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        if(BancoDeDados.getInstance().temId(getActivity())){
-
-        }else {
+        if(!BancoDeDados.getInstance().temId(getActivity())){
             signIn();
         }
 
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        StorageReference imagemRef = storage.getReference().child("images/"+BancoDeDados.getInstance().getId(getActivity()));
-                        imagemRef.putFile(imagem).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle unsuccessful uploads
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                Toast.makeText(getContext(), "Imagem salva com sucesso!", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                });
+
+
+                Usuario usuario = new Usuario();
+                usuario.setAno(editTextAno.getText().toString());
+                usuario.setEscola((String) spinnerEscola.getSelectedItem());
+                usuario.setIdade(editTextIdade.getText().toString());
+                usuario.setNome(editTextNome.getText().toString());
+                if(imagem != null) {
+                    usuario.setFoto(imagem.getPath());
+                    mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                        @Override
+                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                            StorageReference imagemRef = storage.getReference().child("images/"+BancoDeDados.getInstance().getId(getActivity()));
+                            imagemRef.putFile(imagem).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle unsuccessful uploads
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                    Toast.makeText(getContext(), "Imagem salva com sucesso!", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("usuarios");
+                myRef.child(BancoDeDados.getInstance().getId(getActivity())).setValue(usuario);
+
+
 
             }
         });
@@ -147,8 +173,6 @@ public class PerfilFragment extends Fragment {
             salvaId(account);
             firebaseAuthWithGoogle(account);
             Log.v("terceirao", "" + account.getEmail() + " e " + account.getDisplayName() + " e " + account.getId());
-        }else{
-            Log.v("terceirao", "Conta nula");
         }
 
         // updateUI(account);

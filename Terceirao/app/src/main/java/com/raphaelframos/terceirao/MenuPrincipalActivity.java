@@ -44,10 +44,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
-
-
-        FragmentoUtils.replace(MenuPrincipalActivity.this, new PerfilFragment());
+        FragmentoUtils.replace(MenuPrincipalActivity.this, new DisciplinasFragment());
 
      //   startActivity(new Intent(this, FirebaseActivity.class));
 

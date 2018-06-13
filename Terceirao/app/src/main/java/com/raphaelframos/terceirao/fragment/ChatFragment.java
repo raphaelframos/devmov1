@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -22,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.raphaelframos.terceirao.MenuPrincipalActivity;
 import com.raphaelframos.terceirao.R;
 import com.raphaelframos.terceirao.adapter.ChatAdapter;
+import com.raphaelframos.terceirao.banco_dados.BancoDeDados;
 import com.raphaelframos.terceirao.model.Mensagem;
 
 import org.w3c.dom.Text;
@@ -34,7 +39,9 @@ public class ChatFragment extends Fragment {
     private ListView listViewChat;
     private FirebaseListAdapter<Mensagem> adapter;
     private DatabaseReference reference;
-
+    private Spinner spinnerEscola;
+    private EditText editTextMensagem;
+    private ImageView imageViewEnviar;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -52,34 +59,67 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listViewChat = getView().findViewById(R.id.list_view_chat);
+        spinnerEscola = getView().findViewById(R.id.spinner_escola);
+        editTextMensagem = getView().findViewById(R.id.edit_mensagem);
+        imageViewEnviar = getView().findViewById(R.id.image_enviar);
 
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference().child("chat");
-        Mensagem mensagem = new Mensagem();
-        mensagem.setTexto("Teste novo chat");
-        reference.push().setValue(mensagem);
-
-        FirebaseListOptions<Mensagem> options = new FirebaseListOptions.Builder<Mensagem>()
-                .setQuery(reference, Mensagem.class)
-                .setLayout(R.layout.adapter_chat)
-                .build();
-
-        adapter = new FirebaseListAdapter<Mensagem>(options) {
-
+        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        spinnerEscola.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            protected void populateView(View v, Mensagem model, int position) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                TextView textView = v.findViewById(R.id.text_view_mensagem);
-                textView.setText(model.getTexto());
+
+                reference = firebaseDatabase.getReference().child("chat").child(((String) spinnerEscola.getSelectedItem()));
+
+
+                FirebaseListOptions<Mensagem> options = new FirebaseListOptions.Builder<Mensagem>()
+                        .setQuery(reference, Mensagem.class)
+                        .setLayout(R.layout.adapter_chat)
+                        .build();
+
+                adapter = new FirebaseListAdapter<Mensagem>(options) {
+
+                    @Override
+                    protected void populateView(View v, Mensagem model, int position) {
+
+                        TextView textView = v.findViewById(R.id.text_view_mensagem);
+                        textView.setText(model.getTexto());
+
+                    }
+                };
+                listViewChat.setAdapter(adapter);
+                adapter.startListening();
 
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        };
+            }
+        });
 
-        listViewChat.setAdapter(adapter);
-        adapter.startListening();
+        imageViewEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String texto = editTextMensagem.getText().toString();
+
+                if(!texto.isEmpty()){
+                    Mensagem mensagem = new Mensagem();
+                    mensagem.setId(BancoDeDados.getInstance().getId(getActivity()));
+                    mensagem.setTexto(texto);
+                    reference.push().setValue(mensagem);
+                    editTextMensagem.setText("");
+                }
+
+
+            }
+        });
+
+        /*
+
+        */
+
 
     }
 }
