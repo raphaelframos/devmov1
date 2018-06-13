@@ -194,6 +194,7 @@ public class PerfilFragment extends Fragment {
     }
 
     private void salvaUsuario(Usuario usuario) {
+        myRef = FirebaseDatabase.getInstance().getReference("usuarios").child(BancoDeDados.getInstance().getId(getActivity()));
         myRef.setValue(usuario);
         BancoDeDados.getInstance().salvaNome(getActivity(), usuario.getNome());
         BancoDeDados.getInstance().salvaFoto(getActivity(), usuario.getFoto());
@@ -204,17 +205,11 @@ public class PerfilFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // [START on_start_sign_in]
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if(account != null){
             salvaId(account);
             firebaseAuthWithGoogle(account);
         }
-
-        // updateUI(account);
-        // [END on_start_sign_in]
     }
 
     private void signIn() {
@@ -262,7 +257,6 @@ public class PerfilFragment extends Fragment {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             salvaId(account);
-            myRef = FirebaseDatabase.getInstance().getReference("usuarios").child(BancoDeDados.getInstance().getId(getActivity()));
         } catch (ApiException e) {
             e.printStackTrace();
         }

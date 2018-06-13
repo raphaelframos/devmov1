@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="teste"
                     android:textStyle="bold"
                     android:id="@+id/text_view_nome"
                     android:layout_width="match_parent"
