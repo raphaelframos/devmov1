@@ -100,8 +100,6 @@ public class PerfilFragment extends Fragment {
 
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        myRef = FirebaseDatabase.getInstance().getReference("usuarios").child(BancoDeDados.getInstance().getId(getActivity()));
-
         imageViewFoto = getView().findViewById(R.id.imageFoto);
         spinnerEscola = getView().findViewById(R.id.spinner_escola_usuario);
         buttonSalvar = getView().findViewById(R.id.button_salvar_perfil);
@@ -119,17 +117,22 @@ public class PerfilFragment extends Fragment {
         });
 
         if(BancoDeDados.getInstance().temId(getActivity())){
+            myRef = FirebaseDatabase.getInstance().getReference("usuarios").child(BancoDeDados.getInstance().getId(getActivity()));
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     usuario = dataSnapshot.getValue(Usuario.class);
-                    editTextIdade.setText(usuario.getIdade());
-                    editTextNome.setText(usuario.getNome());
-                    String escola = usuario.getEscola();
-                    String[] escolas = getResources().getStringArray(R.array.escola);
-                    int posicao = Arrays.asList(escolas).indexOf(escola);
-                    spinnerEscola.setSelection(posicao);
-                    Picasso.get().load(usuario.getFoto()).into(imageViewFoto);
+                    try {
+                        editTextIdade.setText(usuario.getIdade());
+                        editTextNome.setText(usuario.getNome());
+                        String escola = usuario.getEscola();
+                        String[] escolas = getResources().getStringArray(R.array.escola);
+                        int posicao = Arrays.asList(escolas).indexOf(escola);
+                        spinnerEscola.setSelection(posicao);
+                        Picasso.get().load(usuario.getFoto()).into(imageViewFoto);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -144,6 +147,7 @@ public class PerfilFragment extends Fragment {
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 if(usuario == null){
                     usuario = new Usuario();
@@ -222,7 +226,6 @@ public class PerfilFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             try{
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -239,14 +242,10 @@ public class PerfilFragment extends Fragment {
                 {
                     try
                     {
-
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                      //  imageViewFoto.setImageBitmap(bitmap);
-
                         imagem = data.getData();
                         Picasso.get().load(imagem).fit().centerCrop().into(imageViewFoto);
 
-                    } catch (IOException e)
+                    } catch (Exception e)
                     {
                         e.printStackTrace();
                     }
@@ -263,6 +262,7 @@ public class PerfilFragment extends Fragment {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             salvaId(account);
+            myRef = FirebaseDatabase.getInstance().getReference("usuarios").child(BancoDeDados.getInstance().getId(getActivity()));
         } catch (ApiException e) {
             e.printStackTrace();
         }
@@ -284,7 +284,8 @@ public class PerfilFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                         //   updateUI(user);
+
+                            //   updateUI(user);
                         } else {
                             Toast.makeText(getActivity(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
