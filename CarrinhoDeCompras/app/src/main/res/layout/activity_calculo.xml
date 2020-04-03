@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CalculoActivity">
+
+    <TextView
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Entre com o preço e quantidade do produto 1 e produto 2 que você deseja comparar."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:textStyle="italic"
+                android:text="Produto 1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+
+            <View
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
+
+            <EditText
+                android:id="@+id/editTextPreco1"
+                android:hint="Preço"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+            <EditText
+                android:id="@+id/editTextQuantidade1"
+                android:hint="Quantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/colorPrimary"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"></View>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:textStyle="italic"
+                android:text="Produto 2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+
+            <View
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
+
+            <EditText
+                android:id="@+id/editTextPreco2"
+                android:hint="Preço"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+            <EditText
+                android:id="@+id/editTextQuantidade2"
+                android:hint="Quantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></EditText>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:onClick="calcular"
+        android:id="@+id/buttonCalcular"
+        android:layout_margin="10dp"
+        android:text="Calcular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
+
+<TextView
+    android:textSize="20sp"
+    android:id="@+id/textViewResultado"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></TextView>
+
+</LinearLayout>
