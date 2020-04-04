@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="Entre com o preço e quantidade do produto 1 e produto 2 que você deseja comparar."
+        android:text="@string/entre_com_o_pre_o_e_quantidade_do_produto_1_e_produto_2_que_voc_deseja_comparar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
 
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/linearLayoutProdutoUm"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="0dip"
@@ -30,7 +31,7 @@
             <TextView
                 android:gravity="center_horizontal"
                 android:textStyle="italic"
-                android:text="Produto 1"
+                android:text="@string/produto_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
 
@@ -40,14 +41,16 @@
                 android:layout_height="1dp"></View>
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/editTextPreco1"
-                android:hint="Preço"
+                android:hint="@string/preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/editTextQuantidade1"
-                android:hint="Quantidade"
+                android:hint="@string/quantidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
 
@@ -59,6 +62,7 @@
             android:layout_height="match_parent"></View>
 
         <LinearLayout
+            android:id="@+id/linearLayoutProdutoDois"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="0dip"
@@ -67,7 +71,7 @@
             <TextView
                 android:gravity="center_horizontal"
                 android:textStyle="italic"
-                android:text="Produto 2"
+                android:text="@string/produto_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
 
@@ -77,14 +81,16 @@
                 android:layout_height="1dp"></View>
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/editTextPreco2"
-                android:hint="Preço"
+                android:hint="@string/preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
 
             <EditText
+                android:inputType="numberDecimal"
                 android:id="@+id/editTextQuantidade2"
-                android:hint="Quantidade"
+                android:hint="@string/quantidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></EditText>
 
@@ -98,12 +104,15 @@
         android:onClick="calcular"
         android:id="@+id/buttonCalcular"
         android:layout_margin="10dp"
-        android:text="Calcular"
+        android:text="@string/calcular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></Button>
 
 <TextView
-    android:textSize="20sp"
+    android:gravity="center_horizontal"
+    android:textStyle="bold"
+    android:layout_margin="20dp"
+    android:textSize="25sp"
     android:id="@+id/textViewResultado"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"></TextView>

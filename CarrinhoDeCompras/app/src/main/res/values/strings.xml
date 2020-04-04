@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Carrinho de compras</string>
+    <string name="preco">Preço</string>
+    <string name="entre_com_o_pre_o_e_quantidade_do_produto_1_e_produto_2_que_voc_deseja_comparar">Entre com o preço e quantidade do produto 1 e produto 2 que você deseja comparar.</string>
+    <string name="produto_1">Produto 1</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="produto_2">Produto 2</string>
+    <string name="calcular">Calcular</string>
+    <string name="melhor_preco">Melhor preço</string>
 </resources>

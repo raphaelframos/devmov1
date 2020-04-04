@@ -12,12 +12,12 @@
 
 
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".CalculoActivity" android:label="@string/melhor_preco"></activity>
 
 
 
 
-        <activity android:name=".CalculoActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
