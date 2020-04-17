@@ -1,9 +1,13 @@
 package br.com.raphaelframos.carrinhodecompras;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +22,8 @@ public class CalculoActivity extends AppCompatActivity {
     private EditText editTextQuantidadeUm;
     private EditText editTextQuantidadeDois;
     private TextView textViewResultado;
-    private LinearLayout linearLayoutProdutoUm;
-    private LinearLayout linearLayoutProdutoDois;
+    private TextView textViewProdutoUm;
+    private TextView textViewProdutoDois;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,8 @@ public class CalculoActivity extends AppCompatActivity {
         editTextQuantidadeUm = findViewById(R.id.editTextQuantidade1);
         editTextQuantidadeDois = findViewById(R.id.editTextQuantidade2);
         textViewResultado = findViewById(R.id.textViewResultado);
-        linearLayoutProdutoUm = findViewById(R.id.linearLayoutProdutoUm);
-        linearLayoutProdutoDois = findViewById(R.id.linearLayoutProdutoDois);
-
+        textViewProdutoUm = findViewById(R.id.textView_produto_um);
+        textViewProdutoDois = findViewById(R.id.textView_produto_dois);
     }
 
     public void calcular(View view){
@@ -44,14 +47,11 @@ public class CalculoActivity extends AppCompatActivity {
         String quantidadeDois = editTextQuantidadeDois.getText().toString();
 
         if(validaCampos(precoUm, precoDois, quantidadeUm, quantidadeDois)){
-            limpaCampos();
             String resultado = defineMelhorPreco(precoUm, quantidadeUm, precoDois, quantidadeDois);
             textViewResultado.setText(resultado);
         }else{
             Toast.makeText(getApplicationContext(), "Por favor, preencha todos os campos", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     private void limpaCampos() {
@@ -59,8 +59,7 @@ public class CalculoActivity extends AppCompatActivity {
         editTextQuantidadeUm.setText("");
         editTextPrecoDois.setText("");
         editTextPrecoUm.setText("");
-        linearLayoutProdutoUm.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
-        linearLayoutProdutoDois.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
+        editTextPrecoUm.requestFocus();
     }
 
     public String defineMelhorPreco(String precoUm, String quantidadeUm, String precoDois, String quantidadeDois){
@@ -71,10 +70,12 @@ public class CalculoActivity extends AppCompatActivity {
 
         if(indiceProdutoUm < indiceProdutoDois){
             resultado += "1";
-            linearLayoutProdutoUm.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
+            textViewProdutoUm.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
+            textViewProdutoDois.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
         }else{
+            textViewProdutoUm.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vermelho));
+            textViewProdutoDois.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
             resultado += "2";
-            linearLayoutProdutoDois.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
         }
         return resultado;
 
@@ -104,6 +105,20 @@ public class CalculoActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_calculo, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        switch (item.getItemId()){
+            case R.id.action_limpar:
+                limpaCampos();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
