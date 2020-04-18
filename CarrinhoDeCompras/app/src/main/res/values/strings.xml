@@ -8,4 +8,9 @@
     <string name="calcular">Calcular</string>
     <string name="melhor_preco">Melhor preço</string>
     <string name="limpar">Limpar</string>
+    <string name="melhor_preco_produto">A melhor oferta é o Produto</string>
+    <string name="campo_branco">Campo em branco!</string>
+    <string name="numero_maior_zero">Número deve ser maior que zero.</string>
+    <string name="novo_produto">Novo produto</string>
+    <string name="nome">Nome</string>
 </resources>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="verde">#4CAF50</color>
-    <color name="vermelho">#FF0000</color>
-    <color name="cinza">#676767</color>
+    <color name="colorPrimary">#FEC109</color>
+    <color name="colorPrimaryDark">#DAA504</color>
+    <color name="colorAccent">#49CBDC</color>
+    <color name="verde">#43b253</color>
+    <color name="vermelho">#d03318</color>
+    <color name="cinza">#D7DAD8</color>
+    <color name="marrom">#A38D67</color>
+    <color name="cinza_escuro">#434240</color>
 </resources>

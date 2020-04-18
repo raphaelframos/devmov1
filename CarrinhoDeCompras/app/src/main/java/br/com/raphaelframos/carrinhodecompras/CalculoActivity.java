@@ -63,11 +63,11 @@ public class CalculoActivity extends AppCompatActivity {
     }
 
     public String defineMelhorPreco(String precoUm, String quantidadeUm, String precoDois, String quantidadeDois){
-        double indiceProdutoUm = Double.parseDouble(precoUm)/Double.parseDouble(quantidadeUm);
-        double indiceProdutoDois = Double.parseDouble(precoDois)/Double.parseDouble(quantidadeDois);
+        double indiceProdutoUm = getDouble(precoUm) / getDouble(quantidadeUm);
+        double indiceProdutoDois = getDouble(precoDois) / getDouble(quantidadeDois);
 
-        String resultado = "O melhor produto é o ";
-
+        String resultado = getString(R.string.melhor_preco_produto);
+        resultado += " ";
         if(indiceProdutoUm < indiceProdutoDois){
             resultado += "1";
             textViewProdutoUm.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.verde));
@@ -81,27 +81,56 @@ public class CalculoActivity extends AppCompatActivity {
 
     }
 
+    private double getDouble(String numero) {
+        try{
+            return Double.parseDouble(numero);
+        }catch (Exception e){
+            return 0.0;
+        }
+    }
+
     public boolean validaCampos(String precoUm, String precoDois, String quantidadeUm, String quantidadeDois){
 
         if(precoUm.isEmpty()){
-            editTextPrecoUm.setError("Campo em branco!");
+            editTextPrecoUm.setError(getString(R.string.campo_branco));
             return false;
         }
 
         if(precoDois.isEmpty()){
-            editTextPrecoDois.setError("Campo em branco!");
+            editTextPrecoDois.setError(getString(R.string.campo_branco));
             return false;
         }
 
         if(quantidadeUm.isEmpty()){
-            editTextQuantidadeUm.setError("Campo em branco!");
+            editTextQuantidadeUm.setError(getString(R.string.campo_branco));
             return false;
         }
 
         if(quantidadeDois.isEmpty()){
-            editTextQuantidadeDois.setError("Campo em branco!");
+            editTextQuantidadeDois.setError(getString(R.string.campo_branco));
             return false;
         }
+
+        if(getDouble(precoUm) <= 0){
+            editTextPrecoUm.setError(getString(R.string.numero_maior_zero));
+            return false;
+        }
+        if(getDouble(precoDois) <= 0){
+            editTextPrecoDois.setError(getString(R.string.numero_maior_zero));
+            return false;
+        }
+
+        if(getDouble(quantidadeUm) <= 0){
+            editTextQuantidadeUm.setError(getString(R.string.numero_maior_zero));
+            return false;
+        }
+
+        if(getDouble(quantidadeDois) <= 0){
+            editTextQuantidadeDois.setError(getString(R.string.numero_maior_zero));
+            return false;
+        }
+
+
         return true;
     }
 
