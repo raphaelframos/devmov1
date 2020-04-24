@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".NovoProdutoActivity">
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:text="Insira as informações para adicionar um novo produto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -13,35 +21,47 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapWords"
             android:hint="@string/nome" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_weight="1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/preco" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextQuantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="@string/quantidade" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <Spinner
+            android:layout_marginLeft="5dp"
+            android:entries="@array/unidades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/quantidade" />
-    </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
 
     <Button
+        android:id="@+id/buttonSalvar"
         android:layout_marginTop="20dp"
-        android:text="Salvar"
+        android:text="@string/salvar"
         style="@style/BotaoPrincipal"></Button>
 </LinearLayout>

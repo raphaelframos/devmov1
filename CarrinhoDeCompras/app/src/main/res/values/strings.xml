@@ -13,4 +13,11 @@
     <string name="numero_maior_zero">Número deve ser maior que zero.</string>
     <string name="novo_produto">Novo produto</string>
     <string name="nome">Nome</string>
+    <string name="salvar">Salvar</string>
+
+    <string-array name="unidades">
+        <item>Un</item>
+        <item>Kg</item>
+        <item>L</item>
+    </string-array>
 </resources>
