@@ -1,8 +1,10 @@
 package br.com.raphaelframos.carrinhodecompras;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         listViewProdutos = findViewById(R.id.listView_produtos);
 
         final ArrayList<Produto> produtos = new ArrayList<>();
-        Produto produto = new Produto();
+        final Produto produto = new Produto();
         produto.setNome("Coca cola");
         produto.setQuantidade(2);
         produto.setUnidade("Un");
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         produto4.setUnidade("Kg");
         produtos.add(produto4);
 
-        ArrayAdapter<Produto> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, produtos);
+        final ArrayAdapter<Produto> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, produtos);
         listViewProdutos.setAdapter(adapter);
         listViewProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,7 +76,18 @@ public class MainActivity extends AppCompatActivity {
         listViewProdutos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Se voce acha que cachaça é água... cachaça n é agua não", Toast.LENGTH_LONG).show();
+                final Produto produtoEscolhido = produtos.get(position);
+                AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
+                alerta.setMessage("Deseja excluir este produto?").setTitle("Atenção");
+                alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        produtos.remove(produtoEscolhido);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                alerta.setNegativeButton("Não", null);
+                alerta.show();
                 return true;
             }
         });
