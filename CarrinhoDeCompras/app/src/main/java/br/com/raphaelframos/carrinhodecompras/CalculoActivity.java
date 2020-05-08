@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -49,6 +51,7 @@ public class CalculoActivity extends AppCompatActivity {
         if(validaCampos(precoUm, precoDois, quantidadeUm, quantidadeDois)){
             String resultado = defineMelhorPreco(precoUm, quantidadeUm, precoDois, quantidadeDois);
             textViewResultado.setText(resultado);
+            hideKeyboard(this);
         }else{
             Toast.makeText(getApplicationContext(), "Por favor, preencha todos os campos", Toast.LENGTH_LONG).show();
         }
@@ -60,6 +63,9 @@ public class CalculoActivity extends AppCompatActivity {
         editTextPrecoDois.setText("");
         editTextPrecoUm.setText("");
         editTextPrecoUm.requestFocus();
+        textViewResultado.setText("");
+        textViewProdutoDois.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.cinza_escuro));
+        textViewProdutoUm.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.cinza_escuro));
     }
 
     public String defineMelhorPreco(String precoUm, String quantidadeUm, String precoDois, String quantidadeDois){
@@ -132,6 +138,15 @@ public class CalculoActivity extends AppCompatActivity {
 
 
         return true;
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

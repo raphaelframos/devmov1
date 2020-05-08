@@ -8,6 +8,21 @@ public class Produto {
     private double quantidade;
     private String unidade;
 
+    public Produto addNome(String nome){
+        setNome(nome);
+        return this;
+    }
+
+    public Produto addUnidade(String unidade){
+        setUnidade(unidade);
+        return this;
+    }
+
+    public Produto addQuantidade(String quantidade){
+        setQuantidade(quantidade);
+        return this;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -43,5 +58,13 @@ public class Produto {
             return Math.round(getQuantidade()) + "";
         }
         return getQuantidade() + "";
+    }
+
+    public void setQuantidade(String quantidadeDigitada) {
+        if(quantidadeDigitada.isEmpty()){
+            setQuantidade(0);
+        }else{
+            setQuantidade(Double.valueOf(quantidadeDigitada));
+        }
     }
 }
