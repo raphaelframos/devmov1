@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Produto> produtos;
     private ArrayAdapter<Produto> adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, NovoProdutoActivity.class));
             }
         });
+
+        startActivity(new Intent(this, ListaProdutosActivity.class));
     }
 
     private void criaAdapter() {
