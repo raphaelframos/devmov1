@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PappoFurado</string>
+
+    <string-array name="categorias">
+        <item>Geral</item>
+        <item>Filmes</item>
+        <item>Séries</item>
+        <item>Jogos</item>
+        <item>Política</item>
+    </string-array>
+</resources>
