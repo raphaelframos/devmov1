@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_canais"
+    <ListView
+        android:id="@+id/listView_canais"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dip" />
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/editText_nome_canal"
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content">
@@ -31,11 +32,13 @@
             </EditText>
 
             <Spinner
+                android:id="@+id/spinner_categorias"
                 android:entries="@array/categorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></Spinner>
 
             <ImageView
+                android:id="@+id/imageView_criar"
                 android:layout_gravity="center_vertical"
                 android:padding="2dp"
                 android:src="@drawable/ic_action_enviar"

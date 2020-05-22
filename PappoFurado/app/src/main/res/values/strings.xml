@@ -3,6 +3,7 @@
 
     <string-array name="categorias">
         <item>Geral</item>
+        <item>Esporte</item>
         <item>Filmes</item>
         <item>Séries</item>
         <item>Jogos</item>
