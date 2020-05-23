@@ -6,6 +6,7 @@ public class Canal {
 
     private String nome;
     private String categoria;
+    private String id;
 
     public Canal(){}
 
@@ -34,5 +35,13 @@ public class Canal {
     @Override
     public String toString() {
         return getNome() + " - " + getCategoria();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
