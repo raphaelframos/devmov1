@@ -37,7 +37,8 @@ public class CanalActivity extends AppCompatActivity {
         editTextMensagem = findViewById(R.id.editText_mensagem);
         floatingActionButtonEnviar = findViewById(R.id.fab_enviar);
         listViewMensagens = findViewById(R.id.listView_mensagens);
-
+        listViewMensagens.setFocusable(false);
+        listViewMensagens.setClickable(false);
         final String idDoCanal = getIntent().getStringExtra("id");
 
         db = FirebaseFirestore.getInstance();
@@ -62,6 +63,7 @@ public class CanalActivity extends AppCompatActivity {
                 Mensagem mensagem = new Mensagem();
                 mensagem.setTexto(texto);
                 db.collection("canais").document(idDoCanal).collection("mensagens").add(mensagem);
+                editTextMensagem.setText("");
             }
         });
     }
