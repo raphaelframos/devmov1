@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "630947013324",
+    "firebase_url": "https://pappofurado-e4acf.firebaseio.com",
+    "project_id": "pappofurado-e4acf",
+    "storage_bucket": "pappofurado-e4acf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630947013324:android:4813cac8b536956e75d869",
+        "android_client_info": {
+          "package_name": "br.com.raphaelframos.pappofurado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630947013324-42v6u3pm05urt27l24impcat4eloe0qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA75tQMZQP5psICya39R_ClOt5b2fg3ZCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630947013324-42v6u3pm05urt27l24impcat4eloe0qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 public class Canal {
 
-    private String id;
     private String nome;
     private String categoria;
 
@@ -13,14 +12,6 @@ public class Canal {
     public Canal(String nome, String categoria) {
         setCategoria(categoria);
         setNome(nome);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNome() {

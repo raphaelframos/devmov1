@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".CanalActivity">
 
     <ListView
-        android:id="@+id/listView_canais"
+        android:id="@+id/listView_mensagens"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dip" />
@@ -24,21 +24,16 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editText_nome_canal"
+                android:id="@+id/editText_mensagem"
                 android:layout_weight="1"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content">
 
             </EditText>
 
-            <Spinner
-                android:id="@+id/spinner_categorias"
-                android:entries="@array/categorias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></Spinner>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_criar"
+                android:id="@+id/fab_enviar"
                 android:layout_gravity="center_vertical"
                 app:fabSize="mini"
                 android:layout_margin="2dp"
@@ -46,7 +41,6 @@
                 android:src="@drawable/ic_action_enviar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
