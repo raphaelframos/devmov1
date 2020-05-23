@@ -8,7 +8,8 @@
     tools:context=".CanalActivity">
 
     <ListView
-        android:drawSelectorOnTop="false"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
         android:id="@+id/listView_mensagens"
         android:layout_weight="1"
         android:layout_width="match_parent"
